@@ -1,12 +1,21 @@
-// User can select a rock, paper or scissors
-// When selecting an item, the user is updated to:
-// what the computer player has chosen
-// whether they have won or lost
-// The user can play as many times as they want
+
+const div = document.getElementById('user');
+const addRock = document.getElementById('rock');
+
+addRock.addEventListener('click',(e) => {
+    div.replaceWith(createRock());
+});
+
+function createRock () {
+    const user = document.createElement('IMG');
+    const rockImage = "img/Rock.jpg";
+    user.setAttribute('src',rockImage);
+    return user
+}
+
 
 const selectRock = () => {
-    document.getElementById('user').innerHTML =
-        `<img src="img/Rock.jpg" alt="Rock"  >`;
+
     const computerDraw = randomSelection();
     if("rock" === computerDraw) {
         document.getElementById('computer').innerHTML =
@@ -39,7 +48,5 @@ const randomSelection = () => {
 const rock = document.getElementById('rock').addEventListener('click',selectRock);
 const paper = document.getElementById('paper').addEventListener('click',selectPaper);
 const scissors = document.getElementById('scissors').addEventListener('click',selectScissors);
-
-
 
 console.log(randomSelection());
