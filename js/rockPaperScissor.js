@@ -1,64 +1,113 @@
-const div = document.getElementById('user');
 const rockImage = "img/Rock.jpg";
 const paperImage = "img/Paper.jpg";
 const scissorsImage = "img/Scissors.jpg";
-const rockChoose = 'rock';
-const paperChoice = 'paper';
-const scissorsChoice = 'paper';
 
-const randomSelection = () => {
-    const computerChoices = ['rock','paper','scissors'];
-    return computerChoices[Math.floor(Math.random() * computerChoices.length)];
-};
-
-//Selecting the Rock
-document.getElementById('rock').addEventListener('click',() => {
-    div.replaceWith(createWeaponImage(rockChoose,rockImage));
-    createWeaponImage(rockChoose, rockImage);
-    computerSelection(rockChoose, rockImage)
+const rock = document.getElementById("rock").addEventListener("click", () => {
+  engage("rock", rockImage);
+  console.log('You =', 'Rock Was Selected')
+});
+const paper = document.getElementById("paper").addEventListener("click", () => {
+    engage("paper", paperImage);
+    console.log('You =', 'Paper Was Selected')
+});
+const scissors = document.getElementById("scissors").addEventListener("click", () => {
+    engage("scissors", scissorsImage);
+    console.log('You =', 'Scissors Was Selected')
 });
 
-//Selecting the Paper
-document.getElementById('paper').addEventListener('click',() => {
-    div.replaceWith(createWeaponImage( paperChoice,paperImage ));
-    createWeaponImage(rockChoose, rockImage);
-});
+function engage(weapon, image) {
+    createWeaponImage(weapon, image);
+    compareWeapons(weapon, image);
+}
 
-//Selecting the Scissors
-document.getElementById('scissors').addEventListener('click',() => {
-    div.replaceWith(createWeaponImage( scissorsChoice,scissorsImage ));
-    createWeaponImage(scissorsChoice,scissorsImage);
-});
+const player = document.getElementById('user');
+const computer = document.getElementById('computer');
+const winner = document.getElementById('winner');
 
+const computerChoice = randomSelection();
+
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', ()=>{
+    player.innerHTML = '';
+    computer.innerHTML ='';
+    winner.innerHTML = '';
+});
 
 function createWeaponImage (weapon, image) {
     const user = document.createElement('IMG');
     user.setAttribute('src',image);
-    return user
+    player.innerHTML = '';
+    player.append(user);
 }
 
-function computerSelection(weapon,image){
-    const computerDraw = randomSelection();
-    //tie scenario
-    if(weapon === computerDraw) {
-        document.getElementById('computer').append(createWeaponImage(weapon,image));
-        document.getElementById('winner').innerHTML = 'Tie';
-    }else if(weapon !== computerDraw && computerDraw === 'paper' ) {
-        document.getElementById('computer').innerHTML =
-            `<img src="img/Paper.jpg" alt="Paper"  >`;
-        document.getElementById('winner').innerHTML =
-            `<img src="img/paperoRock.jpg" alt="Paper"  >`;
+function randomSelection() {
+    const computerChoices = ['rock','paper','scissors'];
+    return computerChoices[Math.floor(Math.random() * computerChoices.length)];
+}
+
+function createComputerImage(image){
+    computer.innerHTML = '';
+    const insertComputerImage = document.createElement("IMG");
+    if(computerChoice === 'rock') {
+        insertComputerImage.setAttribute("src", image);
+        computer.append(insertComputerImage);
+    }else if(computerChoice === "paper"){
+        insertComputerImage.setAttribute("src", image);
+        computer.append(insertComputerImage);
     }else{
-        document.getElementById('computer').innerHTML =
-            `<img src="img/Scissors.jpg" alt="Scissors"  >`;
-        document.getElementById('winner').innerHTML =
-            `<img src="img/RockOScissors.jpg" alt="Scissors"  >`;
+        insertComputerImage.setAttribute("src", image);
+        computer.append(insertComputerImage);
+    }
+}
+
+function compareWeapons (weapon,image) {
+    console.log(`Your Choice = ${weapon} vs. Computer Choice = ${computerChoice}`);
+    //tie scenario
+    if (weapon === computerChoice) {
+      createComputerImage(image);
+      winner.innerHTML = "No Winner - This is a Tie";
+      // paper covers rock - paper wins
+    } else if (
+      (weapon === "rock" && computerChoice === "paper") ||
+      (computerChoice === "rock" && weapon === "paper")
+    ) {
+      if (computerChoice === "paper") {
+        createComputerImage(paperImage);
+        winner.innerHTML = "COMPUTER WINS!";
+        console.log("Computer wins");
+      } else {
+        createComputerImage(rockImage);
+        winner.innerHTML = "PLAYER WINS!";
+        console.log("You Win");
+      }
+      // rock breaks scissors - rock wins
+    } else if (
+      (weapon === "rock" && computerChoice === "scissors") ||
+      (computerChoice === "rock" && weapon === "scissors")
+    ) {
+      if (computerChoice === "rock") {
+        createComputerImage(rockImage);
+        winner.innerHTML = "COMPUTER WINS!";
+        console.log("Computer Wins!!!");
+      } else {
+        createComputerImage(scissorsImage);
+        winner.innerHTML = "PLAYER WINS!";
+        console.log("You Win");
+      }
+      // scissors cuts paper - scissors wins
+    } else if (
+      (weapon === "scissors" && computerChoice === "paper") ||
+      (computerChoice === "scissors" && weapon === "paper")) {
+        if (computerChoice === "paper") {
+            createComputerImage(paperImage);
+            winner.innerHTML = "COMPUTER WINS!";
+            console.log("Computer Wins!!!");
+        }else {
+            createComputerImage(scissorsImage);
+            winner.innerHTML = "PLAYER WINS!";
+            console.log("You Wins!!!");
+        }
     }
 }
 
 
-// const rock = document.getElementById('rock').addEventListener('click',computerSelection);
-// const paper = document.getElementById('paper').addEventListener('click',computerSelection);
-// const scissors = document.getElementById('scissors').addEventListener('click',selectScissors);
-
-console.log(randomSelection());

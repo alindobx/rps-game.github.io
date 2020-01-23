@@ -5,11 +5,19 @@
     margin-top:20px;
 }
 
+.player:first-child {
+    padding-right: 227px;
+}
 
 .vs,#winner {
     font-size: 3em;
     font-weight:bold;
     margin-top:110px;
+}
+
+#winner {
+    margin-top:40px;
+    color:red;
 }
 
 #rock, #paper, #scissors {
