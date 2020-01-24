@@ -3,20 +3,19 @@ const paperImage = "img/Paper.jpg";
 const scissorsImage = "img/Scissors.jpg";
 
 const rock = document.getElementById("rock").addEventListener("click", () => {
-  engage("rock", rockImage);
+  startGame("rock", rockImage);
 });
 const paper = document.getElementById("paper").addEventListener("click", () => {
-  engage("paper", paperImage);
+  startGame("paper", paperImage);
 });
 const scissors = document.getElementById("scissors").addEventListener("click", () => {
-    engage("scissors", scissorsImage);
+    startGame("scissors", scissorsImage);
   });
-
 
 let computerChoice;
 const computerWeapons = ["rock", "paper", "scissors"];
 
-function engage(weapon, image) {
+function startGame(weapon, image) {
   computerChoice = randomSelection();
   createWeaponImage(weapon, image);
   compareWeapons(weapon, image);
@@ -44,8 +43,6 @@ function createWeaponImage(weapon, image) {
   player.append(user);
 }
 
-
-
 function createComputerImage(image) {
   computer.innerHTML = "";
   const insertComputerImage = document.createElement("IMG");
@@ -61,54 +58,50 @@ function createComputerImage(image) {
   }
 }
 
-function compareWeapons (weapon,image) {
-    console.log(`Your Choice = ${weapon} vs. Computer Choice = ${computerChoice}`);
-    //tie scenario
-    if (weapon === computerChoice) {
-      createComputerImage(image);
-      winner.innerHTML = "No Winner - This is a Tie";
-      // paper covers rock - paper wins
-    } else if (
-      (weapon === "rock" && computerChoice === "paper") ||
-      (computerChoice === "rock" && weapon === "paper")
-    ) {
-      if (computerChoice === "paper") {
-        createComputerImage(paperImage);
-        winner.innerHTML = "COMPUTER WINS!";
-        console.log("Computer wins");
-      } else {
-        createComputerImage(rockImage);
-        winner.innerHTML = "PLAYER WINS!";
-        console.log("You Win");
-      }
-      // rock breaks scissors - rock wins
-    } else if (
-      (weapon === "rock" && computerChoice === "scissors") ||
-      (computerChoice === "rock" && weapon === "scissors")
-    ) {
-      if (computerChoice === "rock") {
-        createComputerImage(rockImage);
-        winner.innerHTML = "COMPUTER WINS!";
-        console.log("Computer Wins!!!");
-      } else {
-        createComputerImage(scissorsImage);
-        winner.innerHTML = "PLAYER WINS!";
-        console.log("You Win");
-      }
-      // scissors cuts paper - scissors wins
-    } else if (
-      (weapon === "scissors" && computerChoice === "paper") ||
-      (computerChoice === "scissors" && weapon === "paper")) {
-        if (computerChoice === "paper") {
-            createComputerImage(paperImage);
-            winner.innerHTML = "COMPUTER WINS!";
-            console.log("Computer Wins!!!");
-        }else {
-            createComputerImage(scissorsImage);
-            winner.innerHTML = "PLAYER WINS!";
-            console.log("You Wins!!!");
-        }
+function compareWeapons(weapon, image) {
+  //tie scenario
+  if (weapon === computerChoice) {
+    createComputerImage(image);
+    winner.innerHTML = "No Winner - This is a Tie";
+    // paper covers rock - paper wins
+  } else if (
+    (weapon === "rock" && computerChoice === "paper") ||
+    (computerChoice === "rock" && weapon === "paper")
+  ) {
+    if (computerChoice === "paper") {
+      createComputerImage(paperImage);
+      winner.innerHTML = "COMPUTER WINS!";
+    } else {
+      createComputerImage(rockImage);
+      winner.innerHTML = "PLAYER WINS!";
     }
+    // rock breaks scissors - rock wins
+  } else if (
+    (weapon === "rock" && computerChoice === "scissors") ||
+    (computerChoice === "rock" && weapon === "scissors")
+  ) {
+    if (computerChoice === "rock") {
+      createComputerImage(rockImage);
+      winner.innerHTML = "COMPUTER WINS!";
+    } else {
+      createComputerImage(scissorsImage);
+      winner.innerHTML = "PLAYER WINS!";
+    }
+    // scissors cuts paper - scissors wins
+  } else if (
+    (weapon === "scissors" && computerChoice === "paper") ||
+    (computerChoice === "scissors" && weapon === "paper")
+  ) {
+    if (computerChoice === "paper") {
+      createComputerImage(paperImage);
+      winner.innerHTML = `Scissors Cuts Paper <br>PLAYER WINS!`;
+      winner.style.textAlignLast = "center";
+    } else {
+      createComputerImage(scissorsImage);
+      winner.innerHTML = `Scissors Cuts Paper <br>COMPUTER WINS!`;
+      winner.style.textAlignLast = "center";
+    }
+  }
 }
 
 
