@@ -1,2 +1,16 @@
-# rps-game.github.io
-Rock, Paper, Scissors Game
+<h1>Vanilla Javascript Rock, Paper, Scissors Game</h1>
+<br>
+<p><em>Rock, Paper, Scissors application written entirely in pure Javascript, HTML and CSS</em></p>
+<br>
+<p><a href="https://alindobx.github.io/rps-game.github.io/">Click Here</a> to play the Game</p>
+<br>
+<p><img src="https://raw.githubusercontent.com/alindobx/todo-app.github.io/master/image/Screen%20Shot%202020-01-07%20at%2012.53.16%20AM.png" style="max-width:100;"></p>
+<h2>Summary</h2>
+<p>This To Do Apps is a great way to keep track with your Day to Day line items of work, Oh though 
+this application seems easy, there are alot of moving parts. It was a challenge creating a coding all 
+of the intricate details.</p>
+<p>Again I can't stress how fun it was to build this app, and I have some add ons also</p>
+<h2>Author</h2>
+<ul>
+  <li><strong>Anthony Lindo</strong> - <em>Full-Stack Software Developer - <a href="https://www.linkedin.com/in/anthony-lindo/">LinkedIn</a></li>
+</ul>
