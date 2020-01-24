@@ -4,60 +4,61 @@ const scissorsImage = "img/Scissors.jpg";
 
 const rock = document.getElementById("rock").addEventListener("click", () => {
   engage("rock", rockImage);
-  console.log('You =', 'Rock Was Selected')
 });
 const paper = document.getElementById("paper").addEventListener("click", () => {
-    engage("paper", paperImage);
-    console.log('You =', 'Paper Was Selected')
+  engage("paper", paperImage);
 });
 const scissors = document.getElementById("scissors").addEventListener("click", () => {
     engage("scissors", scissorsImage);
-    console.log('You =', 'Scissors Was Selected')
-});
+  });
+
+
+let computerChoice;
+const computerWeapons = ["rock", "paper", "scissors"];
 
 function engage(weapon, image) {
-    createWeaponImage(weapon, image);
-    compareWeapons(weapon, image);
-}
-
-const player = document.getElementById('user');
-const computer = document.getElementById('computer');
-const winner = document.getElementById('winner');
-
-const computerChoice = randomSelection();
-
-const resetButton = document.getElementById('reset');
-resetButton.addEventListener('click', ()=>{
-    player.innerHTML = '';
-    computer.innerHTML ='';
-    winner.innerHTML = '';
-});
-
-function createWeaponImage (weapon, image) {
-    const user = document.createElement('IMG');
-    user.setAttribute('src',image);
-    player.innerHTML = '';
-    player.append(user);
+  computerChoice = randomSelection();
+  createWeaponImage(weapon, image);
+  compareWeapons(weapon, image);
 }
 
 function randomSelection() {
-    const computerChoices = ['rock','paper','scissors'];
-    return computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    return computerWeapons[Math.floor(Math.random() * computerWeapons.length)];
 }
 
-function createComputerImage(image){
-    computer.innerHTML = '';
-    const insertComputerImage = document.createElement("IMG");
-    if(computerChoice === 'rock') {
-        insertComputerImage.setAttribute("src", image);
-        computer.append(insertComputerImage);
-    }else if(computerChoice === "paper"){
-        insertComputerImage.setAttribute("src", image);
-        computer.append(insertComputerImage);
-    }else{
-        insertComputerImage.setAttribute("src", image);
-        computer.append(insertComputerImage);
-    }
+const player = document.getElementById("user");
+const computer = document.getElementById("computer");
+const winner = document.getElementById("winner");
+
+const resetButton = document.getElementById("reset");
+resetButton.addEventListener("click", () => {
+  player.innerHTML = "";
+  computer.innerHTML = "";
+  winner.innerHTML = "";
+});
+
+function createWeaponImage(weapon, image) {
+  const user = document.createElement("IMG");
+  user.setAttribute("src", image);
+  player.innerHTML = "";
+  player.append(user);
+}
+
+
+
+function createComputerImage(image) {
+  computer.innerHTML = "";
+  const insertComputerImage = document.createElement("IMG");
+  if (computerChoice === "rock") {
+    insertComputerImage.setAttribute("src", image);
+    computer.append(insertComputerImage);
+  } else if (computerChoice === "paper") {
+    insertComputerImage.setAttribute("src", image);
+    computer.append(insertComputerImage);
+  } else {
+    insertComputerImage.setAttribute("src", image);
+    computer.append(insertComputerImage);
+  }
 }
 
 function compareWeapons (weapon,image) {
